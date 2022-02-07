@@ -14,9 +14,9 @@ for(var i = 0; i < pacientes.length;i++) {
     var altura = tdAltura.textContent;
     var tdIMC = paciente.querySelector(".info-imc");
     pesoEsValido = validarPeso(peso);
-    alturaEsValida = true;
+    alturaEsValida = validarAltura(altura);
 
-    if ((peso < 0) || (peso > 1000)) { //las barras verticales o el operador or se hacen con alt 124
+    if (!pesoEsValido) { //las barras verticales o el operador or se hacen con alt 124 // un booleano se niega con el signo !
         console.log("peso incorrecto");
         pesoEsValido = false;
         tdIMC.textContent = "El peso es incorrecto"
@@ -24,7 +24,7 @@ for(var i = 0; i < pacientes.length;i++) {
         
     
     }
-    if ((altura < 0) || (altura > 3)) { //las barras verticales o el operador or se hacen con alt 124
+    if (!alturaEsValida) { //las barras verticales o el operador or se hacen con alt 124
         console.log("altura incorrecta");
         alturaEsValida = false;
         tdIMC.textContent = "La altura es incorrecta";
@@ -56,14 +56,15 @@ function validarPeso(peso) {
         return false;
 
     }
-
 }
 
+function validarAltura(altura) {
+    if (altura >= 0 && altura < 3) {
+        return true;
+    }else{
+        return false;
+    
+        }
+    
 
-
-
-
-
-
-
-
+}
