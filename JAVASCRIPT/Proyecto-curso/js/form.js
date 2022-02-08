@@ -5,8 +5,10 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
 
     var paciente = capturarDatosPaciente(form);
     var pacienteTr = construirTr(paciente); 
-    if(!validarPaciente(paciente)) {
-        console.log("Paciente incorrecto");
+    var errores = validarPaciente(paciente);
+    if(errores.length > 0) { //si error es un string se considera como un array de caracteres
+        var menssajeError = document.querySelector("#mensaje-error");
+        menssajeError.textContent = error; //manda el contenido del mensaje y le da el valor de la función invocada error
         return; // asi se hace un break con return vacio en J con un condicional, donde si la condicion no se cumple el código para
 
     }
@@ -61,13 +63,15 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     }
 
     function validarPaciente(paciente) { //si el peso del paciente está correcto, me devuelve true, sino me devuelve false
-        if(validarPeso(paciente.peso)) {
-            return true;
-
-        }else {
-            return false;
+        var errores = []        
+        if(!validarPeso(paciente.peso)) {
+            errores.push("El peso es incorrecto") // push agrega un valor al array       
+        }
+        if(!validarAltura(paciente.altura)) {
+            errores.push("La altura es incorrecta")
         }
 
+        
 
     }
  
