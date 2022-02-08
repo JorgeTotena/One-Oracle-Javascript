@@ -21,9 +21,7 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     mensajesErrores.innerHTML = ""
     
 
-});
-
-       
+});       
 
     function capturarDatosPaciente(form) {
     // capturando datos del formulario
