@@ -4,7 +4,12 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     var form = document.querySelector("#form-adicionar");
 
     var paciente = capturarDatosPaciente(form);
-    var pacienteTr = construirTr(paciente);
+    var pacienteTr = construirTr(paciente); 
+    if(!validarPaciente(paciente)) {
+        console.log("Paciente incorrecto");
+        return; // asi se hace un break con return vacio en J con un condicional, donde si la condicion no se cumple el código para
+
+    }
     var tabla = document.querySelector("#tabla-pacientes");
     tabla.appendChild(pacienteTr); //agregar el row paciente TR al html
     form.reset(); //hace que el formulario se resetee para que no se ingresen datos dobles
@@ -54,6 +59,26 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
 
         return td
     }
+
+    function validarPaciente(paciente) { //si el peso del paciente está correcto, me devuelve true, sino me devuelve false
+        if(validarPeso(paciente.peso)) {
+            return true;
+
+        }else {
+            return false;
+        }
+
+
+    }
  
 
+
+
+
+
+
+
+
 });
+
+
