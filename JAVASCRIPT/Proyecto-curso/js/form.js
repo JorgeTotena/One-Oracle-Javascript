@@ -2,16 +2,16 @@ var botonAdicionar = document.querySelector("#adicionar-paciente")
 botonAdicionar.addEventListener("click", function(event){ //(event) parametro, las funciones anónimas son mejores para trabajar con eventos 
     event.preventDefault(); //se utiliza cuando el navegador, tiene comportamiento padron de borrar la información y actualizarla
     var form = document.querySelector("#form-adicionar");
-
     var paciente = capturarDatosPaciente(form);
     var pacienteTr = construirTr(paciente); 
     var errores = validarPaciente(paciente);
+    
     if(errores.length > 0) { //si error es un string se considera como un array de caracteres
-        var menssajeError = document.querySelector("#mensaje-error");
-        menssajeError.textContent = error; //manda el contenido del mensaje y le da el valor de la función invocada error
+        exhibirMensajesErrores(errores);
         return; // asi se hace un break con return vacio en J con un condicional, donde si la condicion no se cumple el código para
 
     }
+
     var tabla = document.querySelector("#tabla-pacientes");
     tabla.appendChild(pacienteTr); //agregar el row paciente TR al html
     form.reset(); //hace que el formulario se resetee para que no se ingresen datos dobles
@@ -27,7 +27,7 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
         imc: calcularIMC(form.peso.value,form.altura.value)
         }
   
-        return paciente;
+        return paciente; //por esto casi pierdo horas, tener cuidado
     }
 
     function construirTr(paciente) {
@@ -70,18 +70,25 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
         if(!validarAltura(paciente.altura)) {
             errores.push("La altura es incorrecta")
         }
+        return errores;
 
         
 
     }
- 
 
+    function exhibirMensajesErrores(errores){
+        var ul = document.querySelector("#mensaje-errores");
 
+        errores.forEach(function(error) { //para cada valor del array haga cierta cosa
+            var li = document.createElement("li");
+            li.textContent = error;
+            ul.appendChild(li);
 
+         });
 
-
-
-
+    }
+      
+    
 
 });
 
