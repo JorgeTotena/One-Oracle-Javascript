@@ -6,6 +6,7 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     var pacienteTr = construirTr(paciente); 
     var errores = validarPaciente(paciente);
     
+    
     if(errores.length > 0) { //si error es un string se considera como un array de caracteres
         exhibirMensajesErrores(errores);
         return; // asi se hace un break con return vacio en J con un condicional, donde si la condicion no se cumple el código para
@@ -15,6 +16,13 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     var tabla = document.querySelector("#tabla-pacientes");
     tabla.appendChild(pacienteTr); //agregar el row paciente TR al html
     form.reset(); //hace que el formulario se resetee para que no se ingresen datos dobles
+
+    var mensajesErrores = document.querySelector("#mensaje-errores");
+    mensajesErrores.innerHTML = ""
+    
+
+});
+
        
 
     function capturarDatosPaciente(form) {
@@ -63,12 +71,30 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     }
 
     function validarPaciente(paciente) { //si el peso del paciente está correcto, me devuelve true, sino me devuelve false
-        var errores = []        
+        var errores = []  
+        if(paciente.nombre.length == 0) {
+            errores.push("El nombre no puede estar vacio"); // push agrega un valor al array       
+        }
+
+        if(paciente.peso.length == 0) {
+            errores.push("El peso no puede estar vacio"); // push agrega un valor al array       
+        }
+
+        if(paciente.altura.length == 0) {
+            errores.push("la altura no puede estar vacia"); // push agrega un valor al array       
+        }
+
+        if(paciente.gordura.length == 0) {
+            errores.push("La gordura no puede estar vacia"); // push agrega un valor al array       
+        }
+
+
+        
         if(!validarPeso(paciente.peso)) {
-            errores.push("El peso es incorrecto") // push agrega un valor al array       
+            errores.push("El peso es incorrecto"); // push agrega un valor al array       
         }
         if(!validarAltura(paciente.altura)) {
-            errores.push("La altura es incorrecta")
+            errores.push("La altura es incorrecta");
         }
         return errores;
 
@@ -78,6 +104,7 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
 
     function exhibirMensajesErrores(errores){
         var ul = document.querySelector("#mensaje-errores");
+        ul.innerHTML = "" //cerrame la lista o borramelo
 
         errores.forEach(function(error) { //para cada valor del array haga cierta cosa
             var li = document.createElement("li");
@@ -90,6 +117,5 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
       
     
 
-});
 
 
