@@ -151,3 +151,8 @@ button[disabled=disabled], button:disabled {
 	margin-bottom: 10px;
 
 }
+
+.invisible{
+	display: none;
+
+}
