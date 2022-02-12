@@ -3,7 +3,7 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
     event.preventDefault(); //se utiliza cuando el navegador, tiene comportamiento padron de borrar la información y actualizarla
     var form = document.querySelector("#form-adicionar");
     var paciente = capturarDatosPaciente(form);
-    var pacienteTr = construirTr(paciente); 
+    
     var errores = validarPaciente(paciente);
     
     
@@ -13,15 +13,20 @@ botonAdicionar.addEventListener("click", function(event){ //(event) parametro, l
 
     }
 
-    var tabla = document.querySelector("#tabla-pacientes");
-    tabla.appendChild(pacienteTr); //agregar el row paciente TR al html
+    adicionarPacienteEnLaTabla(paciente);
     form.reset(); //hace que el formulario se resetee para que no se ingresen datos dobles
 
     var mensajesErrores = document.querySelector("#mensaje-errores");
     mensajesErrores.innerHTML = ""
     
 
-});       
+}); 
+
+function adicionarPacienteEnLaTabla(paciente){ //añade el paciente a la tabla
+    var pacienteTr = construirTr(paciente);
+    var tabla = document.querySelector("#tabla-pacientes");
+    tabla.appendChild(pacienteTr); //agregar el row paciente TR al html 
+}
 
     function capturarDatosPaciente(form) {
     // capturando datos del formulario
