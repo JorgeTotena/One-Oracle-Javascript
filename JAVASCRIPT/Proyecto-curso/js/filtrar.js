@@ -11,8 +11,9 @@ campoFiltro.addEventListener("input",function(){ //creando filtro
             var paciente = pacientes[i]
             var tdNombre = paciente.querySelector(".info-nombre");
             var nombre = tdNombre.textContent;
+            var expresion = new RegExp(this.value, "i");
         
-            if(nombre != this.value){ // haciendo la comparación del filtro
+            if(!expresion.test(nombre)){ // haciendo la comparación del filtro con una expresion regular para que sea más eficiente
                 paciente.classList.add("invisible") // mirar css
 
             }else{
