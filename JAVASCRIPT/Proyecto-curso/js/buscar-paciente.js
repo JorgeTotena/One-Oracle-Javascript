@@ -5,9 +5,12 @@ botonBuscar.addEventListener("click", function(){
     var xhr = new XMLHttpRequest; //permite intercambiar datos entre la web y servidores, permite actualizar paginas sin recargarlas
     xhr.open("GET", "https://alura-es-cursos.github.io/api-pacientes/pacientes.json")
     xhr.addEventListener("load", function(){
-        var respuesta = xhr.responseText //me trae lo del repositorio 
-        console.log(xhr.respuesta);
-        console.log(typeof respuesta) // type of respuesta me devuelve el tipo de dato de esa variable
+        var errorAjax = document.querySelector("#error-ajax")
+        if(xhr.status == 200){ //si el repositorio está funcionando
+            errorAjax.classList.add("invisible")
+            var respuesta = xhr.responseText //me trae lo del repositorio 
+            console.log(xhr.respuesta);
+            console.log(typeof respuesta) // type of respuesta me devuelve el tipo de dato de esa variable
 
         var pacientes = JSON.parse(respuesta); // convirtiendo de string a json
         console.log(pacientes);
@@ -15,9 +18,13 @@ botonBuscar.addEventListener("click", function(){
 
         pacientes.forEach(function(paciente){ // utilizando la funcion del formulario
             adicionarPacienteEnLaTabla(paciente);
-            console.log(paciente);
-
-        })
+        });
+            console.log(paciente);        
+        } else {
+            errorAjax.classList.remove("invisible")
+            console.log(xhr.status)
+            console.log(xhr.responseText)
+        }
 
     });
 
